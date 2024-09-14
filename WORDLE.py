@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 
-with open("C:\SP\Python\words.txt", "r") as file: #update your own path
+with open("\.words.txt", "r") as file: #update your own path
     words = [line.strip() for line in file.readlines()]
 
 
