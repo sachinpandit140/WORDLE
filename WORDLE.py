@@ -25,7 +25,7 @@ root.resizable(False, False)
 
 grid = [[tk.Label(root, width=4, height=2, borderwidth=1, relief="solid", font=("Helvetica", 18)) for _ in range(6)] for _ in range(6)]
 for i in range(6):
-    for j in range(6):
+    for j in range(5):
         grid[i][j].grid(row=i, column=j)
 
 
