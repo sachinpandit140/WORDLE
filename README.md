@@ -63,10 +63,14 @@ This project is a simple **Wordle game** built using Python's Tkinter library.
 
 ## Project Structure
 
-wordle-game/ │ ├── words.txt # A list of possible words the game will choose from ├── wordle_game.py # Main Python script containing the game logic and GUI └── README.md # Project documentation (this file)
+```bash
+├── WORDLE
+│   ├── WORDLE.py
+│   ├── README.MD
+│   ├── word.txt #contains all words for the file
 
 
----
+```
 
 ## Contributing
 
