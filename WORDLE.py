@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 
-with open("C:\SP\Python\words.txt", "r") as file: #update your own path
+with open("YOUR PATH HERE", "r") as file: #update your own path
     words = [line.strip() for line in file.readlines()]
 
 
@@ -14,7 +14,7 @@ root.title("Wordle Game")
 
 
 window_width = 620
-window_height = 420
+window_height = 440
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 position_top = int(screen_height / 2 - window_height / 2)
@@ -25,16 +25,16 @@ root.resizable(False, False)
 
 grid = [[tk.Label(root, width=4, height=2, borderwidth=1, relief="solid", font=("Helvetica", 18)) for _ in range(6)] for _ in range(6)]
 for i in range(6):
-    for j in range(6):
+    for j in range(5):
         grid[i][j].grid(row=i, column=j)
 
 
 guessed_chars_label = tk.Label(root, text="  Guessed Characters", font=("Helvetica", 18))
-guessed_chars_label.grid(row=0, column=6)
+guessed_chars_label.grid(row=0, column=5)
 
 
 guessed_chars = tk.Label(root, text="", font=("Helvetica", 18))
-guessed_chars.grid(row=1, column=6, rowspan=5)
+guessed_chars.grid(row=1, column=5, rowspan=5)
 
 guess_label= tk.Label(root, text="Guess:", font=("Helvetica", 18),)
 guess_label.grid(row=7, column=0, columnspan=2, pady=20) 
@@ -66,11 +66,46 @@ def check_guess(event):
             if guess == answer:
                 entry.config(state="disabled")
                 messagebox.showinfo("Congratulations", "You won!")
-            elif check_guess.attempt==5:
+                exit()
+            elif check_guess.attempt==6:
                 entry.config(state="disabled")
                 messagebox.showinfo(":()", f"You lost! The correct word was {answer}")
+                exit()
     elif guess not in words:
         messagebox.showinfo("ERROR","Not a valid word")
+
+def forfeit():
+    entry.config(state="disabled")
+    messagebox.showinfo(":()", f"You lost! The correct word was {answer}")
+    exit()
+
+
+button = tk.Button(root, 
+                   text="Forfeit", 
+                   command=forfeit,
+                   activebackground="blue", 
+                   activeforeground="white",
+                   anchor="center",
+                   bd=3,
+                   bg="lightgray",
+                   cursor="hand2",
+                   disabledforeground="gray",
+                   fg="black",
+                   font=("Arial", 12),
+                   height=1,
+                   highlightbackground="black",
+                   highlightcolor="green",
+                   highlightthickness=1,
+                   justify="center",
+                   overrelief="raised",
+                   padx=10,
+                   pady=5,
+                   width=12,
+                   wraplength=100)
+
+
+button.grid(row=7, column=5)
+
 
 check_guess.attempt = 0
 entry.bind("<Return>", check_guess)
