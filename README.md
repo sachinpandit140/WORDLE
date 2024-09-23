@@ -1,6 +1,6 @@
 # Wordle Game in Python
 
-This project is a simple **Wordle game** built using Python's Tkinter library.
+This project is a simple [**Wordle game**](https://en.wikipedia.org/wiki/Wordle) built using Python's Tkinter library.
 
 ## Features
 - **Interactive GUI** with Tkinter.
@@ -85,7 +85,7 @@ Contributions are welcome! Here's how you can help:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/sachinpandit140/WORDLE/blob/main/README.md) file for details.
 
 ---
 
