@@ -2,11 +2,12 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 
-with open("\\.words.txt", "r") as file: #update your own path
+with open("words.txt", "r") as file: #update your own path
     words = [line.strip() for line in file.readlines()]
 
 
 answer = random.choice(words)
+guessed_char=[]
 
 
 root = tk.Tk()
@@ -50,27 +51,25 @@ def update_grid(guess, attempt):
             grid[attempt][i].config(text=char, bg="yellow")
         else:
             grid[attempt][i].config(text=char, bg="red")
-            guessed_chars.config(text=guessed_chars.cget("text") + char + " ")
+            if char not in guessed_char:
+                guessed_chars.config(text=guessed_chars.cget("text") + char + " ")
+                guessed_char.append(char)
 
 
 def check_guess(event):
     guess = entry.get().strip().lower()
     if len(guess) == 5 and guess.isalpha() and guess in words:
-        used_chars = guessed_chars.cget("text").replace(" ", "")
-        if any(char in used_chars for char in guess):
-            messagebox.showinfo("Invalid Guess", "You have used these characters already. They are marked in red.")
-        else:
-            update_grid(guess, check_guess.attempt)
-            check_guess.attempt += 1
-            entry.delete(0, tk.END)
-            if guess == answer:
-                entry.config(state="disabled")
-                messagebox.showinfo("Congratulations", "You won!")
-                exit()
-            elif check_guess.attempt==6:
-                entry.config(state="disabled")
-                messagebox.showinfo(":()", f"You lost! The correct word was {answer}")
-                exit()
+        update_grid(guess, check_guess.attempt)
+        check_guess.attempt += 1
+        entry.delete(0, tk.END)
+        if guess == answer:
+            entry.config(state="disabled")
+            messagebox.showinfo("Congratulations", "You won!")
+            exit()
+        elif check_guess.attempt==6:
+            entry.config(state="disabled")
+            messagebox.showinfo(":()", f"You lost! The correct word was {answer}")
+            exit()
     elif guess not in words:
         messagebox.showwarning("ERROR","Not a valid word")
     elif not guess.isalpha():
