@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 
-with open("YOUR PATH HERE", "r") as file: #update your own path
+with open("\\.words.txt", "r") as file: #update your own path
     words = [line.strip() for line in file.readlines()]
 
 
@@ -29,7 +29,7 @@ for i in range(6):
         grid[i][j].grid(row=i, column=j)
 
 
-guessed_chars_label = tk.Label(root, text="  Guessed Characters", font=("Helvetica", 18))
+guessed_chars_label = tk.Label(root, text=" Guessed Characters", font=("Helvetica", 18))
 guessed_chars_label.grid(row=0, column=5)
 
 
@@ -72,7 +72,9 @@ def check_guess(event):
                 messagebox.showinfo(":()", f"You lost! The correct word was {answer}")
                 exit()
     elif guess not in words:
-        messagebox.showinfo("ERROR","Not a valid word")
+        messagebox.showwarning("ERROR","Not a valid word")
+    elif not guess.isalpha():
+        messagebox.showwarning("ERROR! Invalid characters in word")
 
 def forfeit():
     entry.config(state="disabled")
